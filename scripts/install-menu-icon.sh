@@ -27,8 +27,9 @@ Options:
   -h, --help        Show this help
 
 Examples:
-  $0 --user --system --apply-whisker   # best for Archcraft (run with sudo for --system)
-  sudo $0 --system --apply-whisker
+  sudo $0 --system
+  $0 --apply-whisker
+  sudo $0 --system && $0 --apply-whisker
 EOF
   exit "${1:-0}"
 }
@@ -83,6 +84,9 @@ install_pixmap_files() {
 MENU_ICON=""
 
 if [[ "$INSTALL_USER" -eq 1 ]]; then
+  if [[ "${EUID:-$(id -u)}" -eq 0 && -n "${SUDO_USER:-}" ]]; then
+    USER_PIXMAP_DIR="$(getent passwd "$SUDO_USER" | cut -d: -f6)/.local/share/pixmaps"
+  fi
   install_pixmap_files "${USER_PIXMAP_DIR}"
   MENU_ICON="${USER_PIXMAP_DIR}/Nocturn.svg"
   if [[ -f "${USER_PIXMAP_DIR}/Nocturn.png" ]]; then
@@ -96,6 +100,19 @@ if [[ "$INSTALL_SYSTEM" -eq 1 ]]; then
   if [[ -f "${SYSTEM_PIXMAP_DIR}/Nocturn.png" ]]; then
     MENU_ICON="${SYSTEM_PIXMAP_DIR}/Nocturn.png"
   fi
+fi
+
+if [[ "$APPLY_WHISKER" -eq 1 && -z "$MENU_ICON" ]]; then
+  for candidate in \
+    "${SYSTEM_PIXMAP_DIR}/Nocturn.png" \
+    "${SYSTEM_PIXMAP_DIR}/Nocturn.svg" \
+    "${HOME}/.local/share/pixmaps/Nocturn.png" \
+    "${HOME}/.local/share/pixmaps/Nocturn.svg"; do
+    if [[ -f "$candidate" ]]; then
+      MENU_ICON="$candidate"
+      break
+    fi
+  done
 fi
 
 apply_whisker_icon() {
@@ -113,9 +130,20 @@ apply_whisker_icon() {
 }
 
 if [[ "$APPLY_WHISKER" -eq 1 && -n "$MENU_ICON" ]]; then
-  apply_whisker_icon "${MENU_ICON}"
-  echo "Whisker Menu icon set to: ${MENU_ICON}"
-  xfce4-panel -r 2>/dev/null || true
+  if [[ "${EUID:-$(id -u)}" -eq 0 ]]; then
+    echo ""
+    echo "Pixmap files are installed. Apply the menu icon as your user (not sudo):"
+    echo "  cd ~/nocturn && ./scripts/install-menu-icon.sh --apply-whisker"
+    echo "Or pick Pixmaps → Nocturn.png in Whisker Menu → Properties → Icon."
+  else
+    apply_whisker_icon "${MENU_ICON}"
+    echo "Whisker Menu icon set to: ${MENU_ICON}"
+    if xfce4-panel -r 2>/dev/null; then
+      echo "Panel reloaded."
+    else
+      echo "Panel reload skipped — log out and back in, or run: xfce4-panel -r"
+    fi
+  fi
 fi
 
 echo ""
