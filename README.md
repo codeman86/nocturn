@@ -43,6 +43,18 @@ scripts/            install, backup, restore
 docs/PALETTE.md     Design colors
 ```
 
+## Nocturn Linux website
+
+Preview the project site locally:
+
+```bash
+cd website
+python -m http.server 8080
+# http://127.0.0.1:8080
+```
+
+See [website/README.md](website/README.md).
+
 ## XFCE Theme Forge
 
 Generate new themes from a config file or **local web UI** (`theme-forge.py serve`):

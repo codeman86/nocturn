@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Nocturn Linux — an Arch-based distribution with a Cursor-inspired dark desktop, forest green accents, and XFCE." />
+  <meta name="theme-color" content="#181818" />
+  <title>Nocturn Linux — work in the dark</title>
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="css/nocturn.css" />
+</head>
+<body>
+  <nav class="site-nav" aria-label="Primary">
+    <div class="shell">
+      <a class="brand" href="#">
+        <img src="assets/logo.svg" width="28" height="28" alt="" />
+        Nocturn Linux
+      </a>
+      <ul class="nav-links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#theme">Theme</a></li>
+        <li><a href="#forge">Theme Forge</a></li>
+        <li><a href="#palette">Palette</a></li>
+      </ul>
+      <a class="btn btn-primary" href="https://github.com/codeman86/nocturn" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="hero-grid" aria-hidden="true"></div>
+    <div class="shell hero-inner">
+      <div>
+        <p class="eyebrow">Arch · XFCE · Built for makers</p>
+        <h1>Linux for the hours when the IDE is still open.</h1>
+        <p class="hero-lead">
+          Nocturn is a dark-first Arch distribution with a desktop that feels like your editor:
+          flat surfaces, square corners, and forest green accents where it matters.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#forge">Build your theme</a>
+          <a class="btn btn-ghost" href="https://github.com/codeman86/nocturn" target="_blank" rel="noopener">View source</a>
+        </div>
+        <div class="hero-meta">
+          <span>GTK 3 / 4</span>
+          <span>xfwm4</span>
+          <span>Whisker Menu</span>
+          <span>Theme Forge</span>
+        </div>
+      </div>
+
+      <div class="desktop-mock" role="img" aria-label="Nocturn desktop preview">
+        <div class="mock-bar"></div>
+        <div class="mock-title">
+          <span>~/projects/nocturn — Terminal</span>
+          <div class="mock-dots" aria-hidden="true"><i></i><i></i><i></i></div>
+        </div>
+        <div class="mock-body">
+          <nav class="mock-side" aria-hidden="true">
+            <div class="on">Home</div>
+            <div>themes</div>
+            <div>configs</div>
+            <div>dist</div>
+          </nav>
+          <div class="mock-main">
+            <div class="cm"># install Nocturn on Archcraft</div>
+            <div><span class="kw">git</span> clone https://github.com/codeman86/nocturn.git</div>
+            <div><span class="kw">cd</span> nocturn</div>
+            <div><span class="kw">./scripts/</span>install-nocturn-theme.sh</div>
+            <div class="line">&nbsp;</div>
+            <div class="cm"># shelter icon → Pixmaps → Nocturn.png</div>
+            <div><span class="str">Applied GTK theme: Nocturn</span></div>
+            <div><span class="kw">xfce4-panel</span> -r</div>
+          </div>
+        </div>
+        <div class="mock-panel">
+          <span class="pulse" aria-hidden="true"></span>
+          <span>Applications</span>
+          <span style="margin-left:auto;color:var(--fg)">12:47</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section id="features">
+    <div class="shell">
+      <div class="section-head">
+        <h2>Designed as one system</h2>
+        <p>Not a wallpaper pack — a coherent stack from window borders to the application menu.</p>
+      </div>
+      <div class="features">
+        <article class="feature">
+          <span class="tag">01 — Desktop</span>
+          <h3>Nocturn theme</h3>
+          <p>Cursor-inspired grays with green selection, focus rings, and a thin accent bar on active windows. Square corners by default.</p>
+        </article>
+        <article class="feature">
+          <span class="tag">02 — Identity</span>
+          <h3>Shelter menu icon</h3>
+          <p>A distinct launcher mark in your panel — visible in Whisker Menu Pixmaps, tuned for dark toolbars.</p>
+        </article>
+        <article class="feature">
+          <span class="tag">03 — Workflow</span>
+          <h3>Backup &amp; restore</h3>
+          <p>Try Nocturn on Archcraft without fear. Scripts save your XFCE settings and put them back when you want.</p>
+        </article>
+        <article class="feature">
+          <span class="tag">04 — Base</span>
+          <h3>Arch underneath</h3>
+          <p>Rolling release, your packages, your AUR. Nocturn is the polish layer — not a fork of your freedom.</p>
+        </article>
+        <article class="feature">
+          <span class="tag">05 — Shell</span>
+          <h3>XFCE</h3>
+          <p>Fast, familiar, configurable. Thunar, panel plugins, and a desktop that stays out of the way.</p>
+        </article>
+        <article class="feature">
+          <span class="tag">06 — Future</span>
+          <h3>ISO &amp; defaults</h3>
+          <p>Theme, icons, and xfconf defaults packaged for a future Nocturn install image — built from this repo.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="theme">
+    <div class="shell split">
+      <div>
+        <div class="section-head">
+          <h2>The Nocturn look</h2>
+          <p>Every hex maps to a role in the GTK theme — background, surface, accent, selection. Same language on the website and on your desktop.</p>
+        </div>
+        <p style="color:var(--fg-dim); font-size:0.95rem;">
+          Preview the theme in a browser before you install, or open the live mock in
+          <code style="font-family:var(--font-mono); color:var(--accent-glow)">themes/Nocturn/preview.html</code>
+          after cloning the repository.
+        </p>
+        <p style="margin-top:20px;">
+          <a class="btn" href="../themes/Nocturn/preview.html">Open theme preview</a>
+        </p>
+      </div>
+      <div class="code-block" aria-label="Sample gtk.css variables">
+<span class="hi">@define-color</span> nocturn_bg           #181818;
+<span class="hi">@define-color</span> nocturn_surface       #252526;
+<span class="hi">@define-color</span> nocturn_accent_bright #40916c;
+<span class="hi">@define-color</span> nocturn_selection     #264f3f;
+
+#whiskermenu-window {
+  background-color: @nocturn_surface;
+  border-radius: 0;
+  border: 1px solid @nocturn_border;
+}
+      </div>
+    </div>
+  </section>
+
+  <section id="forge">
+    <div class="shell">
+      <div class="section-head">
+        <h2>XFCE Theme Forge</h2>
+        <p>Generate your own variant from a JSON config or the local web UI — same engine that builds Nocturn.</p>
+      </div>
+      <div class="split">
+        <div class="code-block">
+<span class="hi"># Windows — design in the browser</span>
+python tools/xfce-theme-forge/theme-forge.py serve
+<span class="hi"># →</span> http://127.0.0.1:8765
+
+<span class="hi"># Linux — install on XFCE</span>
+python tools/xfce-theme-forge/theme-forge.py init Aurora --preset cursor-blue
+python tools/xfce-theme-forge/theme-forge.py build configs/Aurora.json
+python tools/xfce-theme-forge/theme-forge.py install configs/Aurora.json
+        </div>
+        <div>
+          <p style="color:var(--fg-dim); margin-top:0;">
+            Presets include <strong style="color:var(--fg-bright)">nocturn</strong>,
+            <strong style="color:var(--fg-bright)">cursor-blue</strong>,
+            midnight-purple, and ember. Outputs land in <code style="font-family:var(--font-mono)">dist/YourTheme/</code>.
+          </p>
+          <p style="color:var(--fg-dim);">
+            The forge recolors GTK CSS, regenerates xfwm4 borders, and exports a menu pixmap for Whisker Menu.
+          </p>
+          <a class="btn btn-primary" href="https://github.com/codeman86/nocturn/tree/master/tools/xfce-theme-forge" target="_blank" rel="noopener" style="margin-top:24px;">Read Theme Forge docs</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="palette">
+    <div class="shell">
+      <div class="section-head">
+        <h2>Palette</h2>
+        <p>Core tokens — click to copy a hex value.</p>
+      </div>
+      <div class="palette-grid" id="palette-grid"></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="shell">
+      <div class="cta-band">
+        <h2>Nocturn is in the open</h2>
+        <p>Theme, icons, install scripts, backup/restore, and Theme Forge — all in one repository.</p>
+        <a class="btn btn-primary" href="https://github.com/codeman86/nocturn" target="_blank" rel="noopener">github.com/codeman86/nocturn</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="shell">
+      <span>© 2026 Nocturn Linux · MIT</span>
+      <span>Arch · XFCE · Cursor-inspired · Not affiliated with Anysphere</span>
+    </div>
+  </footer>
+
+  <script>
+    const PALETTE = [
+      ["Background", "bg", "#181818"],
+      ["Background alt", "bg-alt", "#1e1e1e"],
+      ["Surface", "surface", "#252526"],
+      ["Surface alt", "surface-alt", "#2d2d2d"],
+      ["Foreground", "fg", "#cccccc"],
+      ["Foreground dim", "fg-dim", "#858585"],
+      ["Accent", "accent", "#2d6a4f"],
+      ["Accent bright", "accent-bright", "#40916c"],
+      ["Accent glow", "accent-glow", "#52b788"],
+      ["Selection", "selection", "#264f3f"],
+    ];
+    const grid = document.getElementById("palette-grid");
+    PALETTE.forEach(([name, , hex]) => {
+      const el = document.createElement("article");
+      el.className = "swatch";
+      el.innerHTML = `
+        <div class="swatch-color" style="background:${hex}"></div>
+        <div class="swatch-info">
+          <strong>${name}</strong>
+          <code>${hex}</code>
+          <button type="button" class="btn" data-copy="${hex}" style="margin-top:8px;width:100%;padding:6px;font-size:0.7rem">Copy</button>
+        </div>`;
+      grid.appendChild(el);
+    });
+  </script>
+  <script src="js/main.js"></script>
+</body>
+</html>
