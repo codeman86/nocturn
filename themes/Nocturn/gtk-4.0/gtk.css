@@ -49,7 +49,7 @@ button {
   background-color: @nocturn_surface;
   color: @nocturn_fg;
   border: 1px solid @nocturn_border;
-  border-radius: 4px;
+  border-radius: 0;
   padding: 6px 14px;
 }
 
@@ -71,7 +71,7 @@ entry {
   background-color: @nocturn_bg;
   color: @nocturn_fg;
   border: 1px solid @nocturn_border;
-  border-radius: 4px;
+  border-radius: 0;
   padding: 6px 8px;
 }
 
@@ -92,12 +92,12 @@ listview row:hover {
 popover {
   background-color: @nocturn_surface;
   border: 1px solid @nocturn_border;
-  border-radius: 6px;
+  border-radius: 0;
 }
 
 scrollbar slider {
   background-color: alpha(@nocturn_fg, 0.18);
-  border-radius: 4px;
+  border-radius: 0;
 }
 
 scrollbar slider:hover {
@@ -125,4 +125,13 @@ tooltip {
 selection {
   background-color: @nocturn_selection;
   color: @nocturn_fg_bright;
+}
+
+window,
+popover,
+button,
+entry,
+headerbar,
+tooltip {
+  border-radius: 0;
 }

@@ -50,7 +50,7 @@
   outline-style: solid;
   outline-width: 1px;
   outline-offset: -2px;
-  -gtk-outline-radius: 4px;
+  -gtk-outline-radius: 0;
 }
 
 .background {
@@ -86,7 +86,7 @@ headerbar button {
   background-color: transparent;
   border: none;
   color: @nocturn_fg;
-  border-radius: 4px;
+  border-radius: 0;
   min-width: 28px;
   min-height: 28px;
   padding: 4px;
@@ -114,7 +114,7 @@ button {
   background-color: @nocturn_surface;
   color: @nocturn_fg;
   border: 1px solid @nocturn_border;
-  border-radius: 4px;
+  border-radius: 0;
   padding: 6px 14px;
   box-shadow: none;
 }
@@ -158,7 +158,7 @@ spinbutton entry {
   background-color: @nocturn_bg;
   color: @nocturn_fg;
   border: 1px solid @nocturn_border;
-  border-radius: 4px;
+  border-radius: 0;
   padding: 6px 8px;
   box-shadow: none;
 }
@@ -246,7 +246,7 @@ popover,
 popover.background {
   background-color: @nocturn_surface;
   border: 1px solid @nocturn_border;
-  border-radius: 6px;
+  border-radius: 0;
   box-shadow: 0 8px 24px alpha(black, 0.45);
 }
 
@@ -279,7 +279,7 @@ scrollbar {
 
 scrollbar slider {
   background-color: alpha(@nocturn_fg, 0.18);
-  border-radius: 4px;
+  border-radius: 0;
   min-width: 8px;
   min-height: 8px;
 }
@@ -295,29 +295,29 @@ scrollbar slider:active {
 /* ---- Scale / progress ---- */
 scale trough {
   background-color: @nocturn_surface;
-  border-radius: 4px;
+  border-radius: 0;
   min-height: 6px;
 }
 
 scale highlight {
   background-color: @nocturn_accent;
-  border-radius: 4px;
+  border-radius: 0;
 }
 
 scale slider {
   background-color: @nocturn_fg;
   border: 2px solid @nocturn_accent_bright;
-  border-radius: 50%;
+  border-radius: 0;
 }
 
 progressbar trough {
   background-color: @nocturn_surface;
-  border-radius: 4px;
+  border-radius: 0;
 }
 
 progressbar progress {
   background-color: @nocturn_accent_bright;
-  border-radius: 4px;
+  border-radius: 0;
 }
 
 /* ---- Check / radio ---- */
@@ -325,7 +325,7 @@ checkbutton check,
 radiobutton radio {
   background-color: @nocturn_bg;
   border: 1px solid @nocturn_border;
-  border-radius: 3px;
+  border-radius: 0;
   min-width: 16px;
   min-height: 16px;
 }
@@ -346,7 +346,7 @@ radiobutton radio:hover {
 switch {
   background-color: @nocturn_surface_alt;
   border: 1px solid @nocturn_border;
-  border-radius: 14px;
+  border-radius: 0;
 }
 
 switch:checked {
@@ -356,7 +356,7 @@ switch:checked {
 
 switch slider {
   background-color: @nocturn_fg_dim;
-  border-radius: 50%;
+  border-radius: 0;
 }
 
 switch:checked slider {
@@ -368,7 +368,7 @@ tooltip {
   background-color: @nocturn_surface;
   color: @nocturn_fg;
   border: 1px solid @nocturn_border;
-  border-radius: 4px;
+  border-radius: 0;
   padding: 6px 8px;
 }
 
@@ -417,7 +417,7 @@ separator {
 frame,
 .frame {
   border: 1px solid @nocturn_border_subtle;
-  border-radius: 6px;
+  border-radius: 0;
 }
 
 /* ---- Infobars ---- */
@@ -450,4 +450,84 @@ infobar.error {
 selection {
   background-color: @nocturn_selection;
   color: @nocturn_fg_bright;
+}
+
+/* ---- Square corners (Cursor-style) ---- */
+window,
+.background,
+popover,
+menu,
+frame,
+.frame,
+entry,
+button,
+tooltip {
+  border-radius: 0;
+}
+
+/* ---- Whisker Menu (Archcraft / Xfce) ---- */
+#whiskermenu-window,
+#whiskermenu-window.background,
+.background.whiskermenu {
+  background-color: @nocturn_surface;
+  color: @nocturn_fg;
+  border: 1px solid @nocturn_border;
+  border-radius: 0;
+  box-shadow: 0 8px 24px alpha(black, 0.45);
+}
+
+#whiskermenu-window frame > border,
+#whiskermenu-window border {
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  background-image: none;
+}
+
+#whiskermenu-window .search-area entry,
+#whiskermenu-window entry {
+  background-color: @nocturn_bg;
+  color: @nocturn_fg;
+  border: 1px solid @nocturn_border;
+  border-radius: 0;
+}
+
+#whiskermenu-window .category-button {
+  background-color: @nocturn_surface;
+  color: @nocturn_fg_dim;
+  border-radius: 0;
+}
+
+#whiskermenu-window .category-button:hover,
+#whiskermenu-window .category-button:checked {
+  background-color: @nocturn_selection;
+  color: @nocturn_fg_bright;
+  border-left: 2px solid @nocturn_accent_bright;
+}
+
+#whiskermenu-window .launchers {
+  background-color: @nocturn_bg_alt;
+  color: @nocturn_fg;
+}
+
+#whiskermenu-window .launchers:hover {
+  background-color: alpha(@nocturn_accent_bright, 0.15);
+  color: @nocturn_fg_bright;
+}
+
+#whiskermenu-button {
+  border-radius: 0;
+}
+
+/* ---- Terminal / CSD windows ---- */
+window.csd,
+.background.csd,
+.titlebar,
+headerbar {
+  border-radius: 0;
+}
+
+messagedialog,
+messagedialog .dialog-action-area button {
+  border-radius: 0;
 }

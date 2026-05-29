@@ -10,7 +10,7 @@
   color: @nocturn_fg;
   border: 1px solid @nocturn_border;
   border-left: 3px solid @nocturn_accent_bright;
-  border-radius: 6px;
+  border-radius: 0;
 }
 
 #xfce4-notify-box button {
