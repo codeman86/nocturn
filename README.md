@@ -4,25 +4,36 @@ XFCE/GTK theme and icon set for **Nocturn Linux** — a Cursor-inspired dark des
 
 ## Quick install (Arch / ArchCraft / any Xfce)
 
+**Back up first** (recommended):
+
 ```bash
 git clone https://github.com/codeman86/nocturn.git
 cd nocturn
-chmod +x scripts/install-nocturn-theme.sh
+chmod +x scripts/backup-xfce-theme.sh scripts/install-nocturn-theme.sh
+./scripts/backup-xfce-theme.sh
 ./scripts/install-nocturn-theme.sh
 ```
+
+To undo and return to your previous look:
+
+```bash
+./scripts/restore-xfce-theme.sh latest
+```
+
+Add `--with-files` to the backup script if your themes live under `~/.themes` or `~/.icons` (copies those folders too). ArchCraft defaults often come from `/usr/share/themes` — the backup still saves the **names** of your active themes so restore puts those back.
 
 ## What's included
 
 - **Nocturn** GTK + xfwm4 theme (`themes/Nocturn/`)
 - **Nocturn** icon theme with shelter-style menu icon (`icons/Nocturn/`)
-- Install script that applies Xfce settings and Whisker Menu icon
+- Install, backup, and restore scripts for Xfce
 
 ## Repository layout
 
 ```
 themes/Nocturn/     GTK / XFCE window theme
 icons/Nocturn/      Menu icons (start-here, nocturn-menu)
-scripts/            install-nocturn-theme.sh
+scripts/            install, backup, restore
 docs/PALETTE.md     Design colors
 ```
 
