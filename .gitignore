@@ -13,3 +13,5 @@ radioactive.svg
 line-segments.svg
 fallout-shelter.svg
 dist/
+__pycache__/
+*.pyc
