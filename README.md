@@ -43,6 +43,18 @@ scripts/            install, backup, restore
 docs/PALETTE.md     Design colors
 ```
 
+## XFCE Theme Forge
+
+Generate new themes from a config file (colors, square corners, menu icon):
+
+```bash
+python tools/xfce-theme-forge/theme-forge.py init MyTheme --preset nocturn
+python tools/xfce-theme-forge/theme-forge.py build configs/MyTheme.json
+python tools/xfce-theme-forge/theme-forge.py install configs/MyTheme.json
+```
+
+See [tools/xfce-theme-forge/README.md](tools/xfce-theme-forge/README.md).
+
 ## Preview without Linux
 
 Open `themes/Nocturn/preview.html` in a browser on Windows or macOS.
