@@ -1,0 +1,15 @@
+Thumbs.db
+Desktop.ini
+.DS_Store
+*.swp
+*~
+
+# Scratch icon exploration (not part of the theme)
+waveform.svg
+virus.svg
+tornado.svg
+skull.svg
+radioactive.svg
+line-segments.svg
+fallout-shelter.svg
+currency-ngn.svg

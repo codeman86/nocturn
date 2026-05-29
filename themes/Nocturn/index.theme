@@ -1,0 +1,17 @@
+[Desktop Entry]
+Type=X-GNOME-Metatheme
+Name=Nocturn
+Name[en_US]=Nocturn
+Comment=Cursor-inspired dark theme with forest green accents for Nocturn Linux
+Comment[en_US]=Cursor-inspired dark theme with forest green accents for Nocturn Linux
+Encoding=UTF-8
+
+[X-GNOME-Metatheme]
+GtkTheme=Nocturn
+MetacityTheme=Nocturn
+IconTheme=Nocturn
+CursorTheme=default
+ButtonLayout=menu:minimize,maximize,close
+
+[Xfce]
+Xfwm4Theme=Nocturn

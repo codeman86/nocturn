@@ -1,0 +1,35 @@
+# Nocturn Dark — Xfwm4 theme
+# Cursor-like flat chrome with green accent on active window top edge
+
+border.width=1
+border.top=2
+button_offset=4
+button_spacing=2
+full_width_title=true
+maximized_shadow=false
+rounded_bottom=false
+rounded_top=false
+shadow_delta_height=0
+shadow_delta_width=0
+shadow_delta_x=0
+shadow_delta_y=0
+show_app_icon=false
+title_alignment=center
+title_font=Sans 9
+title_horizontal_offset=4
+title_shadow_active=false
+title_shadow_inactive=false
+title_vertical_offset_active=1
+title_vertical_offset_inactive=2
+
+# Explicit colors (override GTK pickup where noted in XPMs)
+active_text_color=#e8e8e8
+inactive_text_color=#858585
+active_text_shadow_color=#181818
+inactive_text_shadow_color=#181818
+active_border_color=#40916c
+inactive_border_color=#2b2b2b
+active_color_1=#252526
+active_color_2=#1e1e1e
+inactive_color_1=#1e1e1e
+inactive_color_2=#181818

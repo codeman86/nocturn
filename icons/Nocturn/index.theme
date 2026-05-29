@@ -1,0 +1,21 @@
+[Icon Theme]
+Name=Nocturn
+Name[en_US]=Nocturn
+Comment=Nocturn Linux panel and menu icons
+Comment[en_US]=Nocturn Linux panel and menu icons
+Inherits=Adwaita,hicolor
+Example=start-here
+
+Directories=scalable/places,scalable/apps
+
+[scalable/places]
+Size=16
+MinSize=16
+MaxSize=256
+Type=Scalable
+
+[scalable/apps]
+Size=16
+MinSize=16
+MaxSize=256
+Type=Scalable

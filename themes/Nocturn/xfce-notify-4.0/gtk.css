@@ -1,0 +1,24 @@
+/* Xfce notification daemon — Nocturn Dark */
+
+@define-color nocturn_surface       #252526;
+@define-color nocturn_fg            #cccccc;
+@define-color nocturn_border        #3c3c3c;
+@define-color nocturn_accent_bright #40916c;
+
+#xfce4-notify-box {
+  background-color: @nocturn_surface;
+  color: @nocturn_fg;
+  border: 1px solid @nocturn_border;
+  border-left: 3px solid @nocturn_accent_bright;
+  border-radius: 6px;
+}
+
+#xfce4-notify-box button {
+  background-color: transparent;
+  border: none;
+  color: @nocturn_fg;
+}
+
+#xfce4-notify-box button:hover {
+  color: @nocturn_accent_bright;
+}

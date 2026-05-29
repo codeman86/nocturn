@@ -1,0 +1,128 @@
+/*
+ * Nocturn Dark — GTK 4
+ * Mirrors gtk-3.0 palette for apps on GTK4 (Libadwaita overrides where needed).
+ */
+
+@define-color nocturn_bg           #181818;
+@define-color nocturn_bg_alt        #1e1e1e;
+@define-color nocturn_surface       #252526;
+@define-color nocturn_surface_alt   #2d2d2d;
+@define-color nocturn_border        #3c3c3c;
+@define-color nocturn_border_subtle #2b2b2b;
+@define-color nocturn_fg            #cccccc;
+@define-color nocturn_fg_dim        #858585;
+@define-color nocturn_fg_bright     #e8e8e8;
+@define-color nocturn_accent        #2d6a4f;
+@define-color nocturn_accent_bright #40916c;
+@define-color nocturn_accent_dim    #1b4332;
+@define-color nocturn_accent_glow   #52b788;
+@define-color nocturn_selection     #264f3f;
+
+@define-color theme_bg_color                    @nocturn_bg;
+@define-color theme_fg_color                    @nocturn_fg;
+@define-color theme_base_color                  @nocturn_bg_alt;
+@define-color theme_text_color                  @nocturn_fg;
+@define-color theme_selected_bg_color           @nocturn_accent;
+@define-color theme_selected_fg_color           @nocturn_fg_bright;
+@define-color theme_tooltip_bg_color            @nocturn_surface;
+@define-color theme_tooltip_fg_color            @nocturn_fg;
+@define-color borders                           @nocturn_border_subtle;
+
+window {
+  background-color: @nocturn_bg_alt;
+  color: @nocturn_fg;
+}
+
+headerbar {
+  background-color: @nocturn_surface;
+  color: @nocturn_fg;
+  border-bottom: 1px solid @nocturn_border_subtle;
+  box-shadow: none;
+}
+
+headerbar:backdrop {
+  background-color: @nocturn_bg_alt;
+  color: @nocturn_fg_dim;
+}
+
+button {
+  background-color: @nocturn_surface;
+  color: @nocturn_fg;
+  border: 1px solid @nocturn_border;
+  border-radius: 4px;
+  padding: 6px 14px;
+}
+
+button:hover {
+  background-color: @nocturn_surface_alt;
+  border-color: alpha(@nocturn_accent_bright, 0.45);
+}
+
+button:active {
+  background-color: @nocturn_accent_dim;
+}
+
+button.suggested-action {
+  background-color: @nocturn_accent;
+  color: @nocturn_fg_bright;
+}
+
+entry {
+  background-color: @nocturn_bg;
+  color: @nocturn_fg;
+  border: 1px solid @nocturn_border;
+  border-radius: 4px;
+  padding: 6px 8px;
+}
+
+entry:focus {
+  border-color: @nocturn_accent_bright;
+  box-shadow: 0 0 0 1px alpha(@nocturn_accent_glow, 0.35);
+}
+
+listview row:selected {
+  background-color: @nocturn_selection;
+  color: @nocturn_fg_bright;
+}
+
+listview row:hover {
+  background-color: alpha(@nocturn_fg, 0.05);
+}
+
+popover {
+  background-color: @nocturn_surface;
+  border: 1px solid @nocturn_border;
+  border-radius: 6px;
+}
+
+scrollbar slider {
+  background-color: alpha(@nocturn_fg, 0.18);
+  border-radius: 4px;
+}
+
+scrollbar slider:hover {
+  background-color: alpha(@nocturn_accent_bright, 0.45);
+}
+
+switch:checked {
+  background-color: @nocturn_accent_dim;
+}
+
+switch:checked slider {
+  background-color: @nocturn_accent_glow;
+}
+
+progressbar progress {
+  background-color: @nocturn_accent_bright;
+}
+
+tooltip {
+  background-color: @nocturn_surface;
+  color: @nocturn_fg;
+  border: 1px solid @nocturn_border;
+}
+
+selection {
+  background-color: @nocturn_selection;
+  color: @nocturn_fg_bright;
+}

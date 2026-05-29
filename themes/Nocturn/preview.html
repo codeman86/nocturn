@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nocturn — Theme Preview</title>
+  <style>
+    :root {
+      --bg: #181818;
+      --bg-alt: #1e1e1e;
+      --surface: #252526;
+      --surface-alt: #2d2d2d;
+      --border: #3c3c3c;
+      --border-subtle: #2b2b2b;
+      --fg: #cccccc;
+      --fg-dim: #858585;
+      --fg-bright: #e8e8e8;
+      --accent: #2d6a4f;
+      --accent-bright: #40916c;
+      --accent-dim: #1b4332;
+      --accent-glow: #52b788;
+      --selection: #264f3f;
+      --error: #f48771;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Segoe UI", system-ui, sans-serif;
+      font-size: 13px;
+      background: var(--bg);
+      color: var(--fg);
+      padding: 24px;
+    }
+    h1 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--fg-bright);
+      margin: 0 0 4px;
+    }
+    .subtitle { color: var(--fg-dim); margin: 0 0 24px; }
+    .layout { display: grid; grid-template-columns: 200px 1fr; gap: 16px; max-width: 920px; }
+    .swatches {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .swatch {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 8px;
+      background: var(--surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 4px;
+      font-size: 11px;
+      font-family: ui-monospace, monospace;
+    }
+    .swatch i {
+      width: 20px;
+      height: 20px;
+      border-radius: 3px;
+      flex-shrink: 0;
+      border: 1px solid var(--border-subtle);
+    }
+    .mock-window {
+      border: 1px solid var(--border-subtle);
+      border-radius: 6px;
+      overflow: hidden;
+      background: var(--bg-alt);
+      box-shadow: 0 12px 40px rgba(0,0,0,.5);
+    }
+    .mock-top-accent { height: 2px; background: var(--accent-bright); }
+    .mock-titlebar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 36px;
+      padding: 0 8px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border-subtle);
+      color: var(--fg-bright);
+      font-size: 12px;
+    }
+    .mock-buttons { display: flex; gap: 4px; }
+    .mock-buttons span {
+      width: 12px;
+      height: 12px;
+      border-radius: 2px;
+      opacity: .85;
+    }
+  .btn-close { color: var(--fg); }
+    .mock-body { display: flex; min-height: 280px; }
+    .mock-sidebar {
+      width: 160px;
+      background: var(--surface);
+      border-right: 1px solid var(--border-subtle);
+      padding: 8px 0;
+    }
+    .mock-sidebar div {
+      padding: 6px 12px;
+      color: var(--fg-dim);
+      cursor: default;
+    }
+    .mock-sidebar div.active {
+      background: var(--selection);
+      color: var(--fg-bright);
+      border-left: 2px solid var(--accent-bright);
+    }
+    .mock-sidebar div:hover:not(.active) {
+      background: rgba(255,255,255,.05);
+    }
+    .mock-content { flex: 1; padding: 12px; display: flex; flex-direction: column; gap: 10px; }
+    .mock-tabs {
+      display: flex;
+      gap: 0;
+      border-bottom: 1px solid var(--border-subtle);
+      margin: -4px -4px 4px;
+      padding: 0 4px;
+      background: var(--surface);
+    }
+    .mock-tabs span {
+      padding: 8px 14px;
+      color: var(--fg-dim);
+    }
+    .mock-tabs span.active {
+      background: var(--bg-alt);
+      color: var(--fg-bright);
+      box-shadow: inset 0 -2px 0 var(--accent-bright);
+    }
+    input, button.mock {
+      font: inherit;
+      border-radius: 4px;
+    }
+    input {
+      width: 100%;
+      padding: 8px 10px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--fg);
+    }
+    input:focus {
+      outline: none;
+      border-color: var(--accent-bright);
+      box-shadow: 0 0 0 1px rgba(82, 183, 136, .35);
+    }
+    button.mock {
+      padding: 6px 14px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--fg);
+      cursor: default;
+    }
+    button.mock:hover { border-color: rgba(64, 145, 108, .45); background: var(--surface-alt); }
+    button.mock.primary {
+      background: var(--accent);
+      border-color: var(--accent-bright);
+      color: var(--fg-bright);
+    }
+    .mock-list {
+      border: 1px solid var(--border-subtle);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .mock-list div { padding: 8px 10px; }
+    .mock-list div:nth-child(2) { background: var(--selection); color: var(--fg-bright); }
+    .mock-panel {
+      margin-top: 16px;
+      max-width: 920px;
+      height: 32px;
+      background: var(--surface);
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+      gap: 16px;
+      color: var(--fg-dim);
+      font-size: 12px;
+    }
+    .mock-panel .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-glow);
+    }
+    .note {
+      margin-top: 20px;
+      max-width: 920px;
+      padding: 12px 14px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent-bright);
+      border-radius: 6px;
+      color: var(--fg-dim);
+      line-height: 1.5;
+    }
+    .note strong { color: var(--fg-bright); }
+  </style>
+</head>
+<body>
+  <h1>Nocturn</h1>
+  <p class="subtitle">Browser mockup — open on Windows; clone from GitHub and run the install script on Linux.</p>
+
+  <div class="layout">
+    <div class="swatches" id="swatches"></div>
+
+    <div>
+      <div class="mock-window">
+        <div class="mock-top-accent"></div>
+        <div class="mock-titlebar">
+          <span>Thunar — Home</span>
+          <div class="mock-buttons" title="close / maximize / minimize">
+            <span style="background:var(--fg-dim)"></span>
+            <span style="background:var(--fg-dim)"></span>
+            <span style="background:var(--error)"></span>
+          </div>
+        </div>
+        <div class="mock-body">
+          <nav class="mock-sidebar">
+            <div class="active">Home</div>
+            <div>Documents</div>
+            <div>Downloads</div>
+          </nav>
+          <div class="mock-content">
+            <div class="mock-tabs">
+              <span class="active">General</span>
+              <span>Appearance</span>
+            </div>
+            <input type="text" value="Search files…" readonly />
+            <div style="display:flex;gap:8px">
+              <button class="mock" type="button">Cancel</button>
+              <button class="mock primary" type="button">Apply</button>
+            </div>
+            <div class="mock-list">
+              <div>archcraft.iso</div>
+              <div>nocturn-theme/</div>
+              <div>README.md</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mock-panel"><span class="dot"></span> Applications · Files · Terminal · <span style="margin-left:auto;color:var(--fg)">Fri 19:42</span></div>
+    </div>
+  </div>
+
+  <p class="note">
+    <strong>Not pixel-perfect.</strong> This page approximates colors and layout. Real scrollbars, native widgets, and xfwm4 borders only appear on Linux after
+    <code>./scripts/install-nocturn-theme.sh</code>.
+  </p>
+
+  <script>
+    const colors = [
+      ["Background", "#181818"],
+      ["Surface", "#252526"],
+      ["Accent", "#2d6a4f"],
+      ["Accent bright", "#40916c"],
+      ["Accent glow", "#52b788"],
+      ["Selection", "#264f3f"],
+      ["Foreground", "#cccccc"],
+      ["Border", "#3c3c3c"],
+    ];
+    document.getElementById("swatches").innerHTML = colors.map(([n, h]) =>
+      `<div class="swatch"><i style="background:${h}"></i><span>${n}<br>${h}</span></div>`
+    ).join("");
+  </script>
+</body>
+</html>

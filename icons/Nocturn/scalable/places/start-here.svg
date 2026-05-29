@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="Applications">
+  <!-- Ring: panel foreground -->
+  <path fill="none" stroke="#cccccc" stroke-width="16"
+        d="M128 32a96 96 0 1 1 0 192 96 96 0 0 1 0-192z"/>
+  <!-- Chevrons: Nocturn green accent -->
+  <path fill="#40916c"
+        d="M192 120h-49l23.71-35.56A8 8 0 0 0 160 72H96a8 8 0 0 0-6.66 12.44L113.05 120H64a8 8 0 0 0-6.66 12.44l32 48a8 8 0 0 0 13.32 0l25.34-38 25.34 38a8 8 0 0 0 13.32 0l32-48A8 8 0 0 0 199.05 124.23ZM145.05 88 128 113.58 111 88ZM96 161.58 79 136h34.1Zm64 0L143 136h34.1Z"/>
+</svg>

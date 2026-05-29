@@ -1,0 +1,453 @@
+/*
+ * Nocturn Dark — GTK 3
+ * Cursor IDE–inspired surfaces with dark forest green accents.
+ * https://github.com/nocturn-linux (placeholder)
+ */
+
+/* ---- Palette (Cursor-like + green accent) ---- */
+@define-color nocturn_bg           #181818;
+@define-color nocturn_bg_alt        #1e1e1e;
+@define-color nocturn_surface       #252526;
+@define-color nocturn_surface_alt   #2d2d2d;
+@define-color nocturn_border        #3c3c3c;
+@define-color nocturn_border_subtle #2b2b2b;
+@define-color nocturn_fg            #cccccc;
+@define-color nocturn_fg_dim        #858585;
+@define-color nocturn_fg_bright     #e8e8e8;
+@define-color nocturn_accent        #2d6a4f;
+@define-color nocturn_accent_bright #40916c;
+@define-color nocturn_accent_dim    #1b4332;
+@define-color nocturn_accent_glow   #52b788;
+@define-color nocturn_selection     #264f3f;
+@define-color nocturn_error         #f48771;
+@define-color nocturn_warning       #cca700;
+@define-color nocturn_success       #4ade80;
+
+/* GTK / Xfwm4 symbolic names */
+@define-color theme_bg_color                    @nocturn_bg;
+@define-color theme_fg_color                    @nocturn_fg;
+@define-color theme_base_color                  @nocturn_bg_alt;
+@define-color theme_text_color                  @nocturn_fg;
+@define-color theme_selected_bg_color           @nocturn_accent;
+@define-color theme_selected_fg_color           @nocturn_fg_bright;
+@define-color theme_tooltip_bg_color            @nocturn_surface;
+@define-color theme_tooltip_fg_color            @nocturn_fg;
+@define-color theme_button_bg_color             @nocturn_surface;
+@define-color theme_button_fg_color             @nocturn_fg;
+@define-color insensitive_bg_color              @nocturn_bg;
+@define-color insensitive_fg_color              @nocturn_fg_dim;
+@define-color borders                           @nocturn_border_subtle;
+@define-color unfocused_borders                 @nocturn_border_subtle;
+@define-color warning_color                     @nocturn_warning;
+@define-color error_color                       @nocturn_error;
+@define-color success_color                     @nocturn_success;
+
+* {
+  color: @nocturn_fg;
+  -GtkWidget-focus-padding: 1;
+  -GtkWidget-focus-line-width: 1;
+  outline-color: alpha(@nocturn_accent_glow, 0.55);
+  outline-style: solid;
+  outline-width: 1px;
+  outline-offset: -2px;
+  -gtk-outline-radius: 4px;
+}
+
+.background {
+  background-color: @nocturn_bg;
+  color: @nocturn_fg;
+}
+
+/* ---- Window / titlebar ---- */
+window,
+.background.csd {
+  background-color: @nocturn_bg_alt;
+  border: 1px solid @nocturn_border_subtle;
+}
+
+.titlebar,
+headerbar {
+  background-color: @nocturn_surface;
+  color: @nocturn_fg;
+  border-bottom: 1px solid @nocturn_border_subtle;
+  box-shadow: none;
+  min-height: 36px;
+  padding: 0 6px;
+}
+
+.titlebar:backdrop,
+headerbar:backdrop {
+  background-color: @nocturn_bg_alt;
+  color: @nocturn_fg_dim;
+}
+
+.titlebar button,
+headerbar button {
+  background-color: transparent;
+  border: none;
+  color: @nocturn_fg;
+  border-radius: 4px;
+  min-width: 28px;
+  min-height: 28px;
+  padding: 4px;
+  box-shadow: none;
+}
+
+.titlebar button:hover,
+headerbar button:hover {
+  background-color: alpha(@nocturn_fg, 0.08);
+}
+
+.titlebar button:active,
+headerbar button:active {
+  background-color: alpha(@nocturn_fg, 0.14);
+}
+
+.titlebar button:checked,
+headerbar button:checked {
+  background-color: alpha(@nocturn_accent_bright, 0.25);
+  color: @nocturn_fg_bright;
+}
+
+/* ---- Buttons ---- */
+button {
+  background-color: @nocturn_surface;
+  color: @nocturn_fg;
+  border: 1px solid @nocturn_border;
+  border-radius: 4px;
+  padding: 6px 14px;
+  box-shadow: none;
+}
+
+button:hover {
+  background-color: @nocturn_surface_alt;
+  border-color: alpha(@nocturn_accent_bright, 0.45);
+}
+
+button:active,
+button:checked {
+  background-color: @nocturn_accent_dim;
+  border-color: @nocturn_accent;
+}
+
+button.suggested-action {
+  background-color: @nocturn_accent;
+  border-color: @nocturn_accent_bright;
+  color: @nocturn_fg_bright;
+}
+
+button.suggested-action:hover {
+  background-color: @nocturn_accent_bright;
+}
+
+button.destructive-action {
+  background-color: alpha(@nocturn_error, 0.15);
+  border-color: @nocturn_error;
+  color: @nocturn_error;
+}
+
+button:disabled {
+  background-color: @nocturn_bg;
+  color: @nocturn_fg_dim;
+  border-color: @nocturn_border_subtle;
+}
+
+/* ---- Entries ---- */
+entry,
+spinbutton entry {
+  background-color: @nocturn_bg;
+  color: @nocturn_fg;
+  border: 1px solid @nocturn_border;
+  border-radius: 4px;
+  padding: 6px 8px;
+  box-shadow: none;
+}
+
+entry:focus,
+spinbutton entry:focus {
+  border-color: @nocturn_accent_bright;
+  box-shadow: 0 0 0 1px alpha(@nocturn_accent_glow, 0.35);
+}
+
+entry selection,
+textview text selection {
+  background-color: @nocturn_selection;
+  color: @nocturn_fg_bright;
+}
+
+/* ---- Text views ---- */
+textview {
+  background-color: @nocturn_bg_alt;
+  color: @nocturn_fg;
+}
+
+textview text {
+  background-color: @nocturn_bg_alt;
+}
+
+/* ---- Lists / trees ---- */
+treeview {
+  background-color: @nocturn_bg_alt;
+  color: @nocturn_fg;
+}
+
+treeview:selected,
+treeview:selected:focus {
+  background-color: @nocturn_selection;
+  color: @nocturn_fg_bright;
+}
+
+treeview:hover {
+  background-color: alpha(@nocturn_fg, 0.06);
+}
+
+row:selected,
+list row:selected {
+  background-color: @nocturn_selection;
+  color: @nocturn_fg_bright;
+}
+
+row:hover,
+list row:hover {
+  background-color: alpha(@nocturn_fg, 0.05);
+}
+
+/* ---- Notebook tabs ---- */
+notebook {
+  background-color: @nocturn_bg;
+}
+
+notebook header {
+  background-color: @nocturn_surface;
+  border-bottom: 1px solid @nocturn_border_subtle;
+}
+
+notebook header tabs tab {
+  background-color: transparent;
+  color: @nocturn_fg_dim;
+  border: none;
+  padding: 8px 16px;
+  margin: 0;
+}
+
+notebook header tabs tab:checked {
+  background-color: @nocturn_bg_alt;
+  color: @nocturn_fg_bright;
+  box-shadow: inset 0 -2px 0 @nocturn_accent_bright;
+}
+
+notebook header tabs tab:hover:not(:checked) {
+  background-color: alpha(@nocturn_fg, 0.05);
+  color: @nocturn_fg;
+}
+
+/* ---- Menus / popovers ---- */
+popover,
+popover.background {
+  background-color: @nocturn_surface;
+  border: 1px solid @nocturn_border;
+  border-radius: 6px;
+  box-shadow: 0 8px 24px alpha(black, 0.45);
+}
+
+popover modelbutton:hover,
+menuitem:hover {
+  background-color: alpha(@nocturn_accent_bright, 0.18);
+}
+
+menubar,
+.menu {
+  background-color: @nocturn_surface;
+  color: @nocturn_fg;
+}
+
+menu {
+  background-color: @nocturn_surface;
+  border: 1px solid @nocturn_border;
+  padding: 4px 0;
+}
+
+menuitem {
+  padding: 6px 12px;
+}
+
+/* ---- Scrollbars ---- */
+scrollbar {
+  background-color: transparent;
+  border: none;
+}
+
+scrollbar slider {
+  background-color: alpha(@nocturn_fg, 0.18);
+  border-radius: 4px;
+  min-width: 8px;
+  min-height: 8px;
+}
+
+scrollbar slider:hover {
+  background-color: alpha(@nocturn_accent_bright, 0.45);
+}
+
+scrollbar slider:active {
+  background-color: @nocturn_accent;
+}
+
+/* ---- Scale / progress ---- */
+scale trough {
+  background-color: @nocturn_surface;
+  border-radius: 4px;
+  min-height: 6px;
+}
+
+scale highlight {
+  background-color: @nocturn_accent;
+  border-radius: 4px;
+}
+
+scale slider {
+  background-color: @nocturn_fg;
+  border: 2px solid @nocturn_accent_bright;
+  border-radius: 50%;
+}
+
+progressbar trough {
+  background-color: @nocturn_surface;
+  border-radius: 4px;
+}
+
+progressbar progress {
+  background-color: @nocturn_accent_bright;
+  border-radius: 4px;
+}
+
+/* ---- Check / radio ---- */
+checkbutton check,
+radiobutton radio {
+  background-color: @nocturn_bg;
+  border: 1px solid @nocturn_border;
+  border-radius: 3px;
+  min-width: 16px;
+  min-height: 16px;
+}
+
+checkbutton check:checked,
+radiobutton radio:checked {
+  background-color: @nocturn_accent;
+  border-color: @nocturn_accent_bright;
+  color: @nocturn_fg_bright;
+}
+
+checkbutton check:hover,
+radiobutton radio:hover {
+  border-color: @nocturn_accent_bright;
+}
+
+/* ---- Switch ---- */
+switch {
+  background-color: @nocturn_surface_alt;
+  border: 1px solid @nocturn_border;
+  border-radius: 14px;
+}
+
+switch:checked {
+  background-color: @nocturn_accent_dim;
+  border-color: @nocturn_accent_bright;
+}
+
+switch slider {
+  background-color: @nocturn_fg_dim;
+  border-radius: 50%;
+}
+
+switch:checked slider {
+  background-color: @nocturn_accent_glow;
+}
+
+/* ---- Tooltips ---- */
+tooltip {
+  background-color: @nocturn_surface;
+  color: @nocturn_fg;
+  border: 1px solid @nocturn_border;
+  border-radius: 4px;
+  padding: 6px 8px;
+}
+
+/* ---- Sidebar (Thunar, etc.) ---- */
+.sidebar,
+placessidebar,
+.xfce4-panel {
+  background-color: @nocturn_surface;
+  color: @nocturn_fg;
+}
+
+.sidebar row:selected,
+placessidebar row:selected {
+  background-color: @nocturn_selection;
+  border-left: 2px solid @nocturn_accent_bright;
+}
+
+/* ---- XFCE panel plugin ---- */
+#xfce4-panel-window {
+  background-color: @nocturn_surface;
+  color: @nocturn_fg;
+  border-top: 1px solid @nocturn_border_subtle;
+}
+
+.xfce4-panel button {
+  background-color: transparent;
+  border: none;
+  color: @nocturn_fg;
+}
+
+.xfce4-panel button:hover {
+  background-color: alpha(@nocturn_accent_bright, 0.15);
+}
+
+/* ---- Combobox ---- */
+combobox button {
+  border-left: none;
+}
+
+/* ---- Separator ---- */
+separator {
+  background-color: @nocturn_border_subtle;
+}
+
+/* ---- Frame / cards ---- */
+frame,
+.frame {
+  border: 1px solid @nocturn_border_subtle;
+  border-radius: 6px;
+}
+
+/* ---- Infobars ---- */
+infobar.info {
+  background-color: alpha(@nocturn_accent_bright, 0.2);
+  color: @nocturn_fg_bright;
+  border: 1px solid @nocturn_accent;
+}
+
+infobar.warning {
+  background-color: alpha(@nocturn_warning, 0.15);
+  color: @nocturn_warning;
+}
+
+infobar.error {
+  background-color: alpha(@nocturn_error, 0.15);
+  color: @nocturn_error;
+}
+
+/* ---- Links ---- */
+*:link {
+  color: @nocturn_accent_glow;
+}
+
+*:visited {
+  color: @nocturn_accent_bright;
+}
+
+/* ---- Selection (global) ---- */
+selection {
+  background-color: @nocturn_selection;
+  color: @nocturn_fg_bright;
+}
