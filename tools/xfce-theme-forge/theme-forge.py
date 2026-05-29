@@ -7,6 +7,7 @@ Usage:
   python theme-forge.py build configs/MyTheme.json
   python theme-forge.py install configs/MyTheme.json [--system]
   python theme-forge.py presets
+  python theme-forge.py serve [--port 8765]
 """
 
 from __future__ import annotations
@@ -22,6 +23,7 @@ from lib.builder import build_preview, build_theme  # noqa: E402
 from lib.config import load_config, new_config, save_config  # noqa: E402
 from lib.install import install_theme  # noqa: E402
 from lib.palette import PRESETS  # noqa: E402
+from lib.server import run_server  # noqa: E402
 
 REPO_ROOT = ROOT.parents[1]
 CONFIGS = REPO_ROOT / "configs"
@@ -68,6 +70,11 @@ def cmd_presets(_: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_serve(args: argparse.Namespace) -> int:
+    run_server(host=args.host, port=args.port)
+    return 0
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(
         prog="theme-forge",
@@ -93,6 +100,11 @@ def main() -> int:
 
     p_presets = sub.add_parser("presets", help="List color presets")
     p_presets.set_defaults(func=cmd_presets)
+
+    p_serve = sub.add_parser("serve", help="Start local web UI (Windows-friendly)")
+    p_serve.add_argument("--host", default="127.0.0.1")
+    p_serve.add_argument("--port", type=int, default=8765)
+    p_serve.set_defaults(func=cmd_serve)
 
     args = parser.parse_args()
     try:

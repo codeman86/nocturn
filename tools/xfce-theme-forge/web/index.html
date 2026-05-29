@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>XFCE Theme Forge</title>
+  <style>
+    :root {
+      --bg: #181818;
+      --surface: #252526;
+      --border: #3c3c3c;
+      --fg: #cccccc;
+      --accent: #40916c;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      min-height: 100vh;
+    }
+    header {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+    }
+    h1 { margin: 0 0 6px; font-size: 1.35rem; }
+    .sub { color: #858585; font-size: 0.9rem; }
+    main {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 0;
+      min-height: calc(100vh - 80px);
+    }
+    .panel {
+      padding: 20px 24px;
+      border-right: 1px solid var(--border);
+      overflow-y: auto;
+    }
+    label {
+      display: block;
+      font-size: 0.75rem;
+      color: #858585;
+      margin: 14px 0 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 8px 10px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--fg);
+      border-radius: 0;
+      font: inherit;
+    }
+    input[type="color"] {
+      height: 36px;
+      padding: 2px;
+      cursor: pointer;
+    }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    button {
+      margin-top: 18px;
+      width: 100%;
+      padding: 10px 16px;
+      background: var(--accent);
+      border: none;
+      color: #fff;
+      font-weight: 600;
+      cursor: pointer;
+      font: inherit;
+    }
+    button:hover { filter: brightness(1.1); }
+    button:disabled { opacity: 0.5; cursor: wait; }
+    .preview-wrap {
+      display: flex;
+      flex-direction: column;
+      background: #0d0d0d;
+    }
+    .preview-toolbar {
+      padding: 10px 16px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      font-size: 0.85rem;
+    }
+    .preview-toolbar a { color: var(--accent); }
+    iframe {
+      flex: 1;
+      width: 100%;
+      border: none;
+      background: #181818;
+    }
+    #log {
+      margin-top: 12px;
+      padding: 10px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      font-family: ui-monospace, monospace;
+      font-size: 0.8rem;
+      white-space: pre-wrap;
+      min-height: 60px;
+    }
+    .ok { color: #4ade80; }
+    .err { color: #f48771; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>XFCE Theme Forge</h1>
+    <p class="sub">Design on Windows · install the built theme on Linux (Archcraft / XFCE)</p>
+  </header>
+  <main>
+    <section class="panel">
+      <label for="name">Theme name</label>
+      <input id="name" value="MyTheme" />
+
+      <label for="preset">Preset</label>
+      <select id="preset"></select>
+
+      <div class="row">
+        <div>
+          <label for="bg">Background</label>
+          <input type="color" id="bg" value="#181818" />
+        </div>
+        <div>
+          <label for="surface">Surface</label>
+          <input type="color" id="surface" value="#252526" />
+        </div>
+      </div>
+      <div class="row">
+        <div>
+          <label for="fg">Text</label>
+          <input type="color" id="fg" value="#cccccc" />
+        </div>
+        <div>
+          <label for="accent_bright">Accent</label>
+          <input type="color" id="accent_bright" value="#40916c" />
+        </div>
+      </div>
+      <div class="row">
+        <div>
+          <label for="accent">Accent dark</label>
+          <input type="color" id="accent" value="#2d6a4f" />
+        </div>
+        <div>
+          <label for="selection">Selection</label>
+          <input type="color" id="selection" value="#264f3f" />
+        </div>
+      </div>
+
+      <label><input type="checkbox" id="square_corners" checked /> Square corners</label>
+      <label><input type="checkbox" id="generate_menu_icon" checked /> Generate menu icon</label>
+
+      <button id="build">Build theme</button>
+      <div id="log">Ready. Click Build to generate into <code>dist/</code>.</div>
+    </section>
+    <section class="preview-wrap">
+      <div class="preview-toolbar">
+        <span>Preview</span>
+        <a id="openPreview" href="#" target="_blank" hidden>Open in new tab</a>
+        <a id="openFolder" href="#" hidden>Theme folder</a>
+      </div>
+      <iframe id="frame" title="Theme preview" src="about:blank"></iframe>
+    </section>
+  </main>
+  <script>
+    const fields = ["bg", "surface", "fg", "accent", "accent_bright", "selection"];
+    const presetEl = document.getElementById("preset");
+    const logEl = document.getElementById("log");
+    const frame = document.getElementById("frame");
+
+    async function loadPresets() {
+      const res = await fetch("/api/presets");
+      const data = await res.json();
+      presetEl.innerHTML = data.presets.map(p =>
+        `<option value="${p.id}">${p.id} — accent ${p.accent_bright}</option>`
+      ).join("");
+      applyPreset(presetEl.value);
+    }
+
+    async function applyPreset(id) {
+      const res = await fetch(`/api/presets/${id}`);
+      const colors = await res.json();
+      for (const key of fields) {
+        const el = document.getElementById(key);
+        if (el && colors[key]) el.value = colors[key];
+      }
+    }
+
+    presetEl.addEventListener("change", () => applyPreset(presetEl.value));
+
+    function collectConfig() {
+      const colors = {};
+      for (const key of fields) {
+        colors[key] = document.getElementById(key).value;
+      }
+      return {
+        name: document.getElementById("name").value.trim() || "MyTheme",
+        display_name: document.getElementById("name").value.trim() || "MyTheme",
+        colors,
+        options: {
+          square_corners: document.getElementById("square_corners").checked,
+          generate_menu_icon: document.getElementById("generate_menu_icon").checked,
+          menu_icon_ring: colors.fg,
+          menu_icon_fill: colors.accent_bright,
+        },
+      };
+    }
+
+    document.getElementById("build").addEventListener("click", async () => {
+      const btn = document.getElementById("build");
+      btn.disabled = true;
+      logEl.textContent = "Building…";
+      logEl.className = "";
+      try {
+        const res = await fetch("/api/build", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(collectConfig()),
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || "Build failed");
+        logEl.textContent = data.message + "\n\n" + (data.paths || []).join("\n");
+        logEl.className = "ok";
+        const previewUrl = data.preview_url;
+        frame.src = previewUrl;
+        const open = document.getElementById("openPreview");
+        open.href = previewUrl;
+        open.hidden = false;
+      } catch (e) {
+        logEl.textContent = String(e.message || e);
+        logEl.className = "err";
+      } finally {
+        btn.disabled = false;
+      }
+    });
+
+    loadPresets();
+  </script>
+</body>
+</html>

@@ -10,7 +10,25 @@ Generate complete XFCE/GTK themes from a JSON (or YAML) config — built from th
 - Pixmap SVG for Whisker Menu (`dist/pixmaps/YourTheme.svg`)
 - Browser preview HTML
 
-## Quick start
+## Web UI on Windows (or any OS)
+
+Design themes in your browser. **Build/preview works locally**; install the result on Linux.
+
+```bash
+cd /path/to/nocturn
+python tools/xfce-theme-forge/theme-forge.py serve
+```
+
+Open **http://127.0.0.1:8765** — pick colors, click **Build theme**, preview updates on the right.
+
+Output is written to `dist/YourTheme/`. Copy that folder to Archcraft or run `install` there.
+
+```bash
+# On Linux only:
+python tools/xfce-theme-forge/theme-forge.py install configs/MyTheme.json
+```
+
+## Quick start (command line) (command line)
 
 ```bash
 cd /path/to/nocturn

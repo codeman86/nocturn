@@ -45,12 +45,11 @@ docs/PALETTE.md     Design colors
 
 ## XFCE Theme Forge
 
-Generate new themes from a config file (colors, square corners, menu icon):
+Generate new themes from a config file or **local web UI** (`theme-forge.py serve`):
 
 ```bash
-python tools/xfce-theme-forge/theme-forge.py init MyTheme --preset nocturn
-python tools/xfce-theme-forge/theme-forge.py build configs/MyTheme.json
-python tools/xfce-theme-forge/theme-forge.py install configs/MyTheme.json
+python tools/xfce-theme-forge/theme-forge.py serve
+# open http://127.0.0.1:8765
 ```
 
 See [tools/xfce-theme-forge/README.md](tools/xfce-theme-forge/README.md).
