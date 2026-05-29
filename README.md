@@ -9,9 +9,15 @@ XFCE/GTK theme and icon set for **Nocturn Linux** — a Cursor-inspired dark des
 ```bash
 git clone https://github.com/codeman86/nocturn.git
 cd nocturn
-chmod +x scripts/backup-xfce-theme.sh scripts/install-nocturn-theme.sh
+chmod +x scripts/backup-xfce-theme.sh scripts/install-nocturn-theme.sh scripts/install-menu-icon.sh
 ./scripts/backup-xfce-theme.sh
 ./scripts/install-nocturn-theme.sh
+```
+
+If the menu icon does not appear under **Whisker Menu → Pixmaps** (common on Archcraft):
+
+```bash
+sudo ./scripts/install-menu-icon.sh --system --apply-whisker
 ```
 
 To undo and return to your previous look:

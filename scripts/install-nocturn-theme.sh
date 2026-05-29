@@ -55,6 +55,10 @@ if [[ ! -f "${PIXMAP_SRC}" ]]; then
   echo "Pixmap source not found: ${PIXMAP_SRC}" >&2
   exit 1
 fi
+if [[ ! -x "${SCRIPT_DIR}/install-menu-icon.sh" ]] && [[ ! -f "${SCRIPT_DIR}/install-menu-icon.sh" ]]; then
+  echo "Missing ${SCRIPT_DIR}/install-menu-icon.sh" >&2
+  exit 1
+fi
 
 install_tree() {
   local src="$1" dest="$2"
@@ -66,18 +70,22 @@ install_tree() {
 install_tree "${THEME_SRC}" "${THEME_TARGET}"
 install_tree "${ICON_SRC}" "${ICON_TARGET}"
 
-mkdir -p "$(dirname "${PIXMAP_TARGET}")"
-cp -f "${PIXMAP_SRC}" "${PIXMAP_TARGET}"
-MENU_ICON="${PIXMAP_TARGET}"
-
-# Panel icons often render PNG more reliably than SVG; create when tools exist.
-if command -v rsvg-convert >/dev/null 2>&1; then
-  rsvg-convert -w 48 -h 48 "${PIXMAP_SRC}" -o "${PIXMAP_PNG}"
-elif command -v magick >/dev/null 2>&1; then
-  magick -background none "${PIXMAP_SRC}" -resize 48x48 "${PIXMAP_PNG}"
-elif command -v convert >/dev/null 2>&1; then
-  convert -background none "${PIXMAP_SRC}" -resize 48x48 "${PIXMAP_PNG}"
+# Menu icon for Whisker Menu → Pixmaps (Archcraft lists /usr/share/pixmaps).
+PIXMAP_ARGS=(--user)
+if [[ "$SYSTEM" -eq 1 ]]; then
+  PIXMAP_ARGS=(--system)
 fi
+bash "${SCRIPT_DIR}/install-menu-icon.sh" "${PIXMAP_ARGS[@]}" --apply-whisker
+MENU_ICON=$(
+  if [[ "$SYSTEM" -eq 1 ]]; then
+    if [[ -f /usr/share/pixmaps/Nocturn.png ]]; then echo /usr/share/pixmaps/Nocturn.png; else echo /usr/share/pixmaps/Nocturn.svg; fi
+  else
+    if [[ -f "${HOME}/.local/share/pixmaps/Nocturn.png" ]]; then echo "${HOME}/.local/share/pixmaps/Nocturn.png"; else echo "${HOME}/.local/share/pixmaps/Nocturn.svg"; fi
+  fi
+)
+PIXMAP_TARGET="${MENU_ICON%.png}.svg"
+PIXMAP_PNG="${MENU_ICON%.svg}.png"
+[[ -f "$PIXMAP_PNG" ]] || PIXMAP_PNG=""
 
 if command -v gtk-update-icon-cache >/dev/null 2>&1; then
   gtk-update-icon-cache -f -t "${ICON_TARGET}" 2>/dev/null || true
@@ -94,16 +102,6 @@ apply_xfce() {
 
   xfconf-query -c xfwm4 -p /general/theme -s "${THEME_NAME}" 2>/dev/null || \
     xfconf-query -c xfwm4 -p /general/theme -n -t string -s "${THEME_NAME}" 2>/dev/null || true
-
-  # Whisker Menu: set shelter icon on every whiskermenu plugin instance.
-  while IFS= read -r prop; do
-    [[ -n "$prop" ]] || continue
-    if [[ "$(xfconf-query -c xfce4-panel -p "$prop" 2>/dev/null)" == "whiskermenu" ]]; then
-      base="${prop%/plugin-name}"
-      xfconf-query -c xfce4-panel -p "${base}/button-icon" -s "${MENU_ICON}" 2>/dev/null || \
-        xfconf-query -c xfce4-panel -p "${base}/button-icon" -n -t string -s "${MENU_ICON}" 2>/dev/null || true
-    fi
-  done < <(xfconf-query -c xfce4-panel -l 2>/dev/null | grep '/plugin-name$' || true)
 }
 
 apply_xfce
@@ -124,5 +122,10 @@ echo ""
 echo "Reloading panel (if xfce4-panel is available)..."
 xfce4-panel -r 2>/dev/null || true
 
+echo ""
+if [[ "$SYSTEM" -eq 0 ]]; then
+  echo "If Nocturn is missing under Whisker Menu → Pixmaps on Archcraft, also run:"
+  echo "  sudo ./scripts/install-menu-icon.sh --system --apply-whisker"
+fi
 echo ""
 echo "Log out and back in if panel icons do not refresh immediately."
